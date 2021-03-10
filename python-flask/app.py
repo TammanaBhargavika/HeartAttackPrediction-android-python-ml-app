@@ -13,7 +13,7 @@ def index():
 def ff():
    return render_template("form.html")
 
-@app.route('/form',methods = ['POST', 'GET'])
+@app.route('/predict',methods = ['POST', 'GET'])
 def predict():
    # age gender trp cholestrol fbs ecg thalaz exong old peak slope
    values=[]
