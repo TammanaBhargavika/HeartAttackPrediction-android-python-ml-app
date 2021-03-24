@@ -38,7 +38,7 @@ public class FormPage extends AppCompatActivity {
         etThalach=findViewById(R.id.et_thalach);
         etOldPeak=findViewById(R.id.et_oldpeak);
 
-        //Initializing radiresGenerato group variables
+        //Initializing radiresGenerate group variables
         rgGender= (RadioGroup) findViewById(R.id.rg_gender);
         rgCP= (RadioGroup) findViewById(R.id.rg_cp);
         rgFbs= (RadioGroup) findViewById(R.id.rg_fbs);
@@ -78,47 +78,75 @@ public class FormPage extends AppCompatActivity {
         RadioButton rdThal = findViewById(Thal);
 
         //adding validation to edittexts
+
+        //Validation for Name
         awesomeValidation.addValidation(this, R.id.et_name, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
+
+        //Validation for Age Attribute
         awesomeValidation.addValidation(this, R.id.et_age, Range.closed(13, 80), R.string.ageerror);
+
+        //Validation for Gender Attribute whether Radio button is selected or not
         if (Gender == -1){
             Toast.makeText(FormPage.this, "Please give Gender", Toast.LENGTH_SHORT).show();
         }else{
             String Genderstr=rdGender.getText().toString();
         }
+
+        //Validation for Chest Pain Attribute whether Radio button is selected or not
         if (ChestPain == -1){
             Toast.makeText(FormPage.this, "Please give Chest Pain", Toast.LENGTH_SHORT).show();
         }else{
             String Cpstr=rdCP.getText().toString();
         }
+
+        //Validation for trp Attribute
         awesomeValidation.addValidation(this, R.id.et_trp, Range.closed(90, 160), R.string.trperror);
+
+        //Validation for Cholestrol Attribute
         awesomeValidation.addValidation(this, R.id.et_chol,Range.closed(120, 600), R.string.cholerror);
+
+        //Validation for FBS Attribute whether Radio button is selected or not
         if (FBS == -1){
             Toast.makeText(FormPage.this, "Please give FBS Value", Toast.LENGTH_SHORT).show();
         }else{
             String Fbsstr=rdFbs.getText().toString();
         }
+
+        //Validation for ECG Attribute whether Radio button is selected or not
         if (ECG == -1){
             Toast.makeText(FormPage.this, "Please give ECG Value", Toast.LENGTH_SHORT).show();
         }else{
             String ECGstr=rdECG.getText().toString();
         }
+
+        //Validation for thalach Attribute
         awesomeValidation.addValidation(this, R.id.et_thalach,Range.closed(60, 220), R.string.thalacherror);
+
+        //Validation for Exang Attribute whether Radio button is selected or not
         if (Exang == -1){
             Toast.makeText(FormPage.this, "Please give Exang Value", Toast.LENGTH_SHORT).show();
         }else{
             String Exangstr=rdExang.getText().toString();
         }
-        awesomeValidation.addValidation(this, R.id.et_oldpeak,Range.closed(60, 220), R.string.thalacherror);
+
+        //Validation for Old Peak Attribute
+        awesomeValidation.addValidation(this, R.id.et_oldpeak,Range.closed(13, 60), R.string.OldPeakerror);
+
+        //Validation for Slope Attribute whether Radio button is selected or not
         if (Slope == -1){
             Toast.makeText(FormPage.this, "Please give Slope Value", Toast.LENGTH_SHORT).show();
         }else{
             String Slopestr=rdSlope.getText().toString();
         }
+
+        //Validation for Ca Attribute whether Radio button is selected or not
         if (Ca == -1){
             Toast.makeText(FormPage.this, "Please give Ca Value", Toast.LENGTH_SHORT).show();
         }else{
             String Castr=rdCa.getText().toString();
         }
+
+        //Validation for Thal Attribute whether Radio button is selected or not
         if (Thal == -1){
             Toast.makeText(FormPage.this, "Please give Thal Value", Toast.LENGTH_SHORT).show();
         }else{
@@ -127,9 +155,9 @@ public class FormPage extends AppCompatActivity {
 
         //Checking radio attributes checked or not
         if (awesomeValidation.validate()) {
-            Intent i=new Intent(FormPage.this,ResPage.class);
-            i.putExtra("key",sname);
-            startActivity(i);
+                Intent i=new Intent(FormPage.this,ResPage.class);
+                i.putExtra("key",sname);
+                startActivity(i);
         }
     }
 }

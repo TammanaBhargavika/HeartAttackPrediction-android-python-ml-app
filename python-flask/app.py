@@ -11,7 +11,7 @@ def index():
 
 @app.route('/ff',methods = ['POST', 'GET'])
 def ff():
-   return render_template("form.html")
+   return render_template("predict.html")
 
 @app.route('/predict',methods = ['POST', 'GET'])
 def predict():
