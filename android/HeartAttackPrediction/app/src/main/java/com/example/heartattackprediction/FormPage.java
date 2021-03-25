@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.RadioButton;
@@ -15,10 +14,11 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.common.collect.Range;
+
 public class FormPage extends AppCompatActivity {
     EditText etName,etAge,etTrp,etChol,etThalach,etOldPeak;
     RadioGroup rgGender,rgCP,rgFbs,rgECG,rgExang,rgSlope,rgCa,rgThal;
-//    String Namestr,Agestr,Trpstr,Cholstr,Thalachstr,Oldpeakstr;
+    String Namestr,Agestr,Trpstr,Cholstr,Thalachstr,Oldpeakstr;
 
     //defining AwesomeValidation object
     AwesomeValidation awesomeValidation;
@@ -31,22 +31,22 @@ public class FormPage extends AppCompatActivity {
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
         //Assign Edit Text variable
-        etName=findViewById(R.id.et_name);
-        etAge=findViewById(R.id.et_age);
-        etTrp=findViewById(R.id.et_trp);
-        etChol=findViewById(R.id.et_chol);
-        etThalach=findViewById(R.id.et_thalach);
-        etOldPeak=findViewById(R.id.et_oldpeak);
+        etName    = findViewById (R.id.et_name);
+        etAge     = findViewById (R.id.et_age);
+        etTrp     = findViewById (R.id.et_trp);
+        etChol    = findViewById (R.id.et_chol);
+        etThalach = findViewById (R.id.et_thalach);
+        etOldPeak = findViewById (R.id.et_oldpeak);
 
-        //Initializing radiresGenerate group variables
-        rgGender= (RadioGroup) findViewById(R.id.rg_gender);
-        rgCP= (RadioGroup) findViewById(R.id.rg_cp);
-        rgFbs= (RadioGroup) findViewById(R.id.rg_fbs);
-        rgECG= (RadioGroup) findViewById(R.id.rg_ecg);
-        rgExang= (RadioGroup) findViewById(R.id.rg_exang);
-        rgSlope= (RadioGroup) findViewById(R.id.rg_slope);
-        rgCa= (RadioGroup) findViewById(R.id.rg_ca);
-        rgThal= (RadioGroup) findViewById(R.id.rg_thal);
+        //Initializing radio res Generate group variables
+        rgGender = (RadioGroup) findViewById (R.id.rg_gender);
+        rgCP     = (RadioGroup) findViewById (R.id.rg_cp);
+        rgFbs    = (RadioGroup) findViewById (R.id.rg_fbs);
+        rgECG    = (RadioGroup) findViewById (R.id.rg_ecg);
+        rgExang  = (RadioGroup) findViewById (R.id.rg_exang);
+        rgSlope  = (RadioGroup) findViewById (R.id.rg_slope);
+        rgCa     = (RadioGroup) findViewById (R.id.rg_ca);
+        rgThal   = (RadioGroup) findViewById (R.id.rg_thal);
     }
 
     public void MoveResult(View view) {
@@ -78,7 +78,6 @@ public class FormPage extends AppCompatActivity {
         RadioButton rdThal = findViewById(Thal);
 
         //adding validation to edittexts
-
         //Validation for Name
         awesomeValidation.addValidation(this, R.id.et_name, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
 
@@ -130,7 +129,7 @@ public class FormPage extends AppCompatActivity {
         }
 
         //Validation for Old Peak Attribute
-        awesomeValidation.addValidation(this, R.id.et_oldpeak,Range.closed(13, 60), R.string.OldPeakerror);
+        awesomeValidation.addValidation(this, R.id.et_oldpeak,Range.closed(1, 10), R.string.OldPeakerror);
 
         //Validation for Slope Attribute whether Radio button is selected or not
         if (Slope == -1){

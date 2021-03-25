@@ -252,7 +252,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginRight="5sp"
-                android:inputType="numberSigned"/>
+                android:inputType="numberDecimal"/>
             <!--    Slope value of user-->
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
