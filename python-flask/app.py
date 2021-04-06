@@ -1,7 +1,7 @@
 import numpy as np
 import pickle
 
-from flask import Flask, redirect, url_for, jsonify, request,render_template
+from flask import Flask, redirect, url_for,jsonify, request,render_template
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
 
@@ -18,46 +18,45 @@ def predict():
    # Age Gender Trp Cholestrol Fbs Ecg Thalach Exang OldPeak Slope
    values=[]
    
-   name=request.json['name']
-   #values.append(name)
+   name=request.form['name']
    
-   age=request.json['age']
+   age=request.form['age']
    values.append(age)
    
-   sex=request.json['sex']
+   sex=request.form['sex']
    values.append(sex)
 
-   cp=request.json['cp']
+   cp=request.form['cp']
    values.append(cp)
 
-   trp=request.json['trp']
+   trp=request.form['trp']
    values.append(trp)
 
-   cholestrol=request.json['cholesterol']
+   cholestrol=request.form['cholesterol']
    values.append(cholestrol)
 
-   fbs=request.json['fbs']
+   fbs=request.form['fbs']
    values.append(fbs)
 
-   ecg=request.json['Ecg']
+   ecg=request.form['Ecg']
    values.append(ecg)
 
-   Thalaz=request.json['Thalaz']
+   Thalaz=request.form['Thalaz']
    values.append(Thalaz)
 
-   Exong=request.json['Exong']
+   Exong=request.form['Exong']
    values.append(Exong)
 
-   Oldpeak=request.json['Old Peak']
+   Oldpeak=request.form['Old Peak']
    values.append(Oldpeak)
 
-   slope=request.json['slope']
+   slope=request.form['slope']
    values.append(slope)
 
-   ca=request.json['ca']
+   ca=request.form['ca']
    values.append(ca)
 
-   thal=request.json['thal']
+   thal=request.form['thal']
    values.append(thal)
    
    final_values=[np.array(values)]
@@ -70,9 +69,9 @@ def predict():
    print(result)
    
    if result==0:
-       return render_template('result.html',name=name,age=age,sex=sex,cp=cp,trp=trp,cholestrol=cholestrol,fbs=fbs,ecg=ecg,Thalaz=Thalaz,Exong=Exong,Oldpeak=Oldpeak,slope=slope,ca=ca,thal=thal,rrr=0)
+      return {'message':'You are Diagnised'}      
    else:
-       return render_template('result.html',name=name,age=age,sex=sex,cp=cp,trp=trp,cholestrol=cholestrol,fbs=fbs,ecg=ecg,Thalaz=Thalaz,Exong=Exong,Oldpeak=Oldpeak,slope=slope,ca=ca,thal=thal,rrr=1)
+      return {'message':'You are not Diagnised'}     
 
 
 if __name__ == '__main__':
