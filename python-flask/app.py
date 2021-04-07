@@ -15,48 +15,47 @@ def ff():
 
 @app.route('/predict',methods = ['POST', 'GET'])
 def predict():
-   # Age Gender Trp Cholestrol Fbs Ecg Thalach Exang OldPeak Slope
    values=[]
    
-   name=request.form['name']
+   name=request.json['name']
    
-   age=request.form['age']
+   age=request.json['age']
    values.append(age)
    
-   sex=request.form['sex']
+   sex=request.json['sex']
    values.append(sex)
 
-   cp=request.form['cp']
+   cp=request.json['cp']
    values.append(cp)
 
-   trp=request.form['trp']
+   trp=request.json['trp']
    values.append(trp)
 
-   cholestrol=request.form['cholesterol']
+   cholestrol=request.json['cholestrol']
    values.append(cholestrol)
 
-   fbs=request.form['fbs']
+   fbs=request.json['fbs']
    values.append(fbs)
 
-   ecg=request.form['Ecg']
+   ecg=request.json['Ecg']
    values.append(ecg)
 
-   Thalaz=request.form['Thalaz']
+   Thalaz=request.json['Thalaz']
    values.append(Thalaz)
 
-   Exong=request.form['Exong']
+   Exong=request.json['Exong']
    values.append(Exong)
 
-   Oldpeak=request.form['Old Peak']
+   Oldpeak=request.json['Old Peak']
    values.append(Oldpeak)
 
    slope=request.form['slope']
    values.append(slope)
 
-   ca=request.form['ca']
+   ca=request.json['ca']
    values.append(ca)
 
-   thal=request.form['thal']
+   thal=request.json['thal']
    values.append(thal)
    
    final_values=[np.array(values)]
@@ -69,9 +68,9 @@ def predict():
    print(result)
    
    if result==0:
-      return {'message':'You are Diagnised'}      
+      return {'message':'You are not Diagnosed'}      
    else:
-      return {'message':'You are not Diagnised'}     
+      return {'message':'You are Diagnosed'}     
 
 
 if __name__ == '__main__':
