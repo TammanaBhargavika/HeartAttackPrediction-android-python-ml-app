@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 15 19:37:27 2021
-
-@author: bharg
-"""
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -38,26 +32,6 @@ def smote_func(dataset):
     return os_data_x,x_test, os_data_y,y_test  
     
 #Algorithms.
-#Support Vector Machine
-def svc(dataset,smote):
-    SVC_obj=SVC(kernel='linear',gamma='auto',C=2)
-    print("Object",SVC_obj)
-    if smote=='True':
-        x_train,x_test,y_train,y_test=smote_func(dataset)
-    else:
-        x_train,x_test,y_train,y_test = train_test_split(x , y , test_size=0.2,random_state=10)        
-    SVC_obj.fit(x_train,y_train)
-    #Predict the outcome
-    y_predict_SVC=SVC_obj.predict(x_test)
-    print(y_predict_SVC)
-    print(classification_report(y_test,y_predict_SVC))
-    print("Accuracy percentage SVC:"+"{:.2f}".format(accuracy_score(y_test,y_predict_SVC)*100))
-    a=accuracy_score(y_test,y_predict_SVC)
-    print(a)
-    #Confusion matrix
-    cm = confusion_matrix(y_test, y_predict_SVC)
-    print(cm)
-    return a
 #DecisionTreeClassifier  
 def DTC(dataset,smote):
     DTC_obj=DecisionTreeClassifier()
@@ -75,74 +49,6 @@ def DTC(dataset,smote):
     cm = confusion_matrix(y_test, y_predict_DTC)
     print(cm)
     return b
-#Random Forest
-def RF(dataset,smote):
-    RF_obj=RandomForestClassifier()
-    if smote=='True':
-        x_train,x_test,y_train,y_test=smote_func(dataset)
-    else:
-        x_train,x_test,y_train,y_test = train_test_split(x , y , test_size=0.2,random_state=10)          
-    RF_obj.fit(x_train,y_train)
-    #Predict the outcome
-    y_predict_RF=RF_obj.predict(x_test)
-    print(classification_report(y_test,y_predict_RF))
-    print("Accuracy percentage RF:"+"{:.2f}".format(accuracy_score(y_test,y_predict_RF)*100))
-    c=accuracy_score(y_test,y_predict_RF)
-    #Confusion matrix
-    cm = confusion_matrix(y_test, y_predict_RF)
-    print(cm) 
-    return c
-#Logistic Regression
-def LR(dataset,smote):
-    LR_obj=LogisticRegression()
-    if smote=='True':
-        x_train,x_test,y_train,y_test=smote_func(dataset)
-    else:
-        x_train,x_test,y_train,y_test = train_test_split(x , y , test_size=0.2,random_state=10)      
-    LR_obj.fit(x_train,y_train)
-    #Predict the outcome
-    y_predict_LR=LR_obj.predict(x_test)
-    print(classification_report(y_test,y_predict_LR))
-    print("Accuracy percentage LR:"+"{:.2f}".format(accuracy_score(y_test,y_predict_LR)*100))
-    d=accuracy_score(y_test,y_predict_LR)
-    #Confusion matrix
-    cm = confusion_matrix(y_test, y_predict_LR)
-    print(cm)
-    return d
-#KNeighborsClassifier
-def KNC(dataset,smote):
-    KNC_obj=KNeighborsClassifier()
-    if smote=='True':
-        x_train,x_test,y_train,y_test=smote_func(dataset)
-    else:
-        x_train,x_test,y_train,y_test = train_test_split(x , y , test_size=0.2,random_state=10)      
-    KNC_obj.fit(x_train,y_train)
-    #Predict the outcome
-    y_predict_KNC=KNC_obj.predict(x_test)
-    print(classification_report(y_test,y_predict_KNC))
-    print("Accuracy percentage KNC:"+"{:.2f}".format(accuracy_score(y_test,y_predict_KNC)*100))
-    e=accuracy_score(y_test,y_predict_KNC)
-    #Confusion matrix
-    cm = confusion_matrix(y_test, y_predict_KNC)
-    print(cm)
-    return e
-#Naive Baies
-def NB(dataset,smote):
-    BernNB=BernoulliNB(binarize=True)
-    if smote=='True':
-        x_train,x_test,y_train,y_test=smote_func(dataset)
-    else:
-        x_train,x_test,y_train,y_test = train_test_split(x , y , test_size=0.2,random_state=10)      
-    BernNB.fit(x_train,y_train)
-    #Predict the outcome
-    y_predict_Ber=BernNB.predict(x_test)
-    print(classification_report(y_test,y_predict_Ber))
-    print("Accuracy percentage Naive_Baies:"+"{:.2f}".format(accuracy_score(y_test,y_predict_Ber)*100))
-    f=accuracy_score(y_test,y_predict_Ber)
-    #Confusion matrix
-    cm = confusion_matrix(y_test, y_predict_Ber)
-    print(cm)
-    return f
 
 dataset=pd.read_csv('D:/Projects/ML UI Design/cleveland.csv')
 

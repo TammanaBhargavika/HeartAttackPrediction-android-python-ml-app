@@ -13,7 +13,7 @@ def index():
 def ff():
    return render_template("predict.html")
 
-@app.route('/predict',methods = ['POST', 'GET'])
+@app.route('/predict',methods = ['POST'])
 def predict():
    values=[]
    
