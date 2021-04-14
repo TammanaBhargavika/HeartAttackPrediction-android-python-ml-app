@@ -4,21 +4,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.common.collect.Range;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class FormPage extends AppCompatActivity {
     EditText etName,etAge,etTrp,etChol,etThalach,etOldPeak;
     RadioGroup rgGender,rgCP,rgFbs,rgECG,rgExang,rgSlope,rgCa,rgThal;
     String Namestr,Agestr,Trpstr,Cholstr,Thalachstr,Oldpeakstr;
+
+    TextView res;
 
     //defining AwesomeValidation object
     AwesomeValidation awesomeValidation;
@@ -129,7 +143,7 @@ public class FormPage extends AppCompatActivity {
         }
 
         //Validation for Old Peak Attribute
-        awesomeValidation.addValidation(this, R.id.et_oldpeak,Range.closed(1, 10), R.string.OldPeakerror);
+        awesomeValidation.addValidation(this, R.id.et_oldpeak,Range.closed(1, 100), R.string.OldPeakerror);
 
         //Validation for Slope Attribute whether Radio button is selected or not
         if (Slope == -1){
@@ -151,6 +165,51 @@ public class FormPage extends AppCompatActivity {
         }else{
             String Thalstr=rdThal.getText().toString();
         }
+
+        //volley Android
+        if( !TextUtils.isEmpty(Namestr) && ( !TextUtils.isEmpty(Agestr) && ( !TextUtils.isEmpty(Trpstr) &&( !TextUtils.isEmpty(Cholstr) &&( !TextUtils.isEmpty(Thalachstr) &&( !TextUtils.isEmpty(Oldpeakstr)))))))
+        {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            final String url = "";
+            JSONObject postParams = new JSONObject();
+            try {
+                postParams.put("Name", etName);
+                postParams.put("Age", etAge);
+                postParams.put("Gender", rdGender);
+                postParams.put("Chest Pain", rdCP);
+                postParams.put("Resting Blood Pressure", etTrp);
+                postParams.put("Cholestrol", etChol);
+                postParams.put("Fasting Blood Sugar", rdFbs);
+                postParams.put("Resting ECG", rdECG);
+                postParams.put("Thalach", etThalach);
+                postParams.put("Exang", rdExang);
+                postParams.put("Old Peak", etOldPeak);
+                postParams.put("Slope", rdSlope);
+                postParams.put("Ca", rdCa);
+                postParams.put("Thal", rdThal);
+            } catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, url, postParams, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("On Response", "onResponse: " + response.toString());
+                    res.setText(response.toString());
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("On Error",error.toString());
+                    Toast.makeText(FormPage.this, ""+error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            requestQueue.add(jsonObjectRequest);
+        }
+//        else
+//        {
+//            Toast.makeText(this, "Check if all the details are given correct", Toast.LENGTH_SHORT).show();
+//        }
 
         //Checking radio attributes checked or not
         if (awesomeValidation.validate()) {
