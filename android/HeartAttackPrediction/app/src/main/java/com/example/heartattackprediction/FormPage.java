@@ -32,8 +32,6 @@ public class FormPage extends AppCompatActivity {
     RadioGroup rgGender,rgCP,rgFbs,rgECG,rgExang,rgSlope,rgCa,rgThal;
     String Namestr,Agestr,Trpstr,Cholstr,Thalachstr,Oldpeakstr;
 
-    TextView res;
-
     //defining AwesomeValidation object
     AwesomeValidation awesomeValidation;
 
@@ -143,7 +141,7 @@ public class FormPage extends AppCompatActivity {
         }
 
         //Validation for Old Peak Attribute
-        awesomeValidation.addValidation(this, R.id.et_oldpeak,Range.closed(1, 100), R.string.OldPeakerror);
+        awesomeValidation.addValidation(this, R.id.et_oldpeak, Range.closed(0.0f, 10.0f), R.string.OldPeakerror);
 
         //Validation for Slope Attribute whether Radio button is selected or not
         if (Slope == -1){
@@ -166,56 +164,52 @@ public class FormPage extends AppCompatActivity {
             String Thalstr=rdThal.getText().toString();
         }
 
-        //volley Android
-        if( !TextUtils.isEmpty(Namestr) && ( !TextUtils.isEmpty(Agestr) && ( !TextUtils.isEmpty(Trpstr) &&( !TextUtils.isEmpty(Cholstr) &&( !TextUtils.isEmpty(Thalachstr) &&( !TextUtils.isEmpty(Oldpeakstr)))))))
-        {
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            final String url = "";
-            JSONObject postParams = new JSONObject();
-            try {
-                postParams.put("Name", etName);
-                postParams.put("Age", etAge);
-                postParams.put("Gender", rdGender);
-                postParams.put("Chest Pain", rdCP);
-                postParams.put("Resting Blood Pressure", etTrp);
-                postParams.put("Cholestrol", etChol);
-                postParams.put("Fasting Blood Sugar", rdFbs);
-                postParams.put("Resting ECG", rdECG);
-                postParams.put("Thalach", etThalach);
-                postParams.put("Exang", rdExang);
-                postParams.put("Old Peak", etOldPeak);
-                postParams.put("Slope", rdSlope);
-                postParams.put("Ca", rdCa);
-                postParams.put("Thal", rdThal);
-            } catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-            JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, url, postParams, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.i("On Response", "onResponse: " + response.toString());
-                    res.setText(response.toString());
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i("On Error",error.toString());
-                    Toast.makeText(FormPage.this, ""+error.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            requestQueue.add(jsonObjectRequest);
-        }
-//        else
-//        {
-//            Toast.makeText(this, "Check if all the details are given correct", Toast.LENGTH_SHORT).show();
-//        }
-
         //Checking radio attributes checked or not
         if (awesomeValidation.validate()) {
-                Intent i=new Intent(FormPage.this,ResPage.class);
-                i.putExtra("key",sname);
-                startActivity(i);
+                //volley Android
+                if( !TextUtils.isEmpty(Namestr) && ( !TextUtils.isEmpty(Agestr) && ( !TextUtils.isEmpty(Trpstr) &&( !TextUtils.isEmpty(Cholstr) &&( !TextUtils.isEmpty(Thalachstr) &&( !TextUtils.isEmpty(Oldpeakstr)))))))
+                {
+                    RequestQueue requestQueue = Volley.newRequestQueue(this);
+                    final String url = "";
+                    JSONObject postParams = new JSONObject();
+                    try {
+                        postParams.put("Name", etName);
+                        postParams.put("Age", etAge);
+                        postParams.put("Gender", rdGender);
+                        postParams.put("Chest Pain", rdCP);
+                        postParams.put("Resting Blood Pressure", etTrp);
+                        postParams.put("Cholestrol", etChol);
+                        postParams.put("Fasting Blood Sugar", rdFbs);
+                        postParams.put("Resting ECG", rdECG);
+                        postParams.put("Thalach", etThalach);
+                        postParams.put("Exang", rdExang);
+                        postParams.put("Old Peak", etOldPeak);
+                        postParams.put("Slope", rdSlope);
+                        postParams.put("Ca", rdCa);
+                        postParams.put("Thal", rdThal);
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, url, postParams, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            Log.i("On Response", "onResponse: " + response.toString());
+                            Intent i=new Intent(FormPage.this,ResPage.class);
+                            i.putExtra("key",sname);
+                            i.putExtra("key",response.toString());
+                            startActivity(i);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i("On Error",error.toString());
+                            Toast.makeText(FormPage.this, ""+error.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    requestQueue.add(jsonObjectRequest);
+                }
         }
     }
 }
