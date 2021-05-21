@@ -17,45 +17,45 @@ def ff():
 def predict():
    values=[]
    
-   name=request.json['name']
+   name=request.form['name']
    
-   age=request.json['age']
+   age=request.form['age']
    values.append(age)
    
-   sex=request.json['sex']
+   sex=request.form['sex']
    values.append(sex)
 
-   cp=request.json['cp']
+   cp=request.form['cp']
    values.append(cp)
 
-   trp=request.json['trp']
+   trp=request.form['trp']
    values.append(trp)
 
-   cholestrol=request.json['cholestrol']
+   cholestrol=request.form['cholestrol']
    values.append(cholestrol)
 
-   fbs=request.json['fbs']
+   fbs=request.form['fbs']
    values.append(fbs)
 
-   ecg=request.json['Ecg']
+   ecg=request.form['Ecg']
    values.append(ecg)
 
-   Thalaz=request.json['Thalaz']
+   Thalaz=request.form['Thalaz']
    values.append(Thalaz)
 
-   Exong=request.json['Exong']
+   Exong=request.form['Exong']
    values.append(Exong)
 
-   Oldpeak=request.json['Old Peak']
+   Oldpeak=request.form['Old Peak']
    values.append(Oldpeak)
 
    slope=request.form['slope']
    values.append(slope)
 
-   ca=request.json['ca']
+   ca=request.form['ca']
    values.append(ca)
 
-   thal=request.json['thal']
+   thal=request.form['thal']
    values.append(thal)
    
    final_values=[np.array(values)]
