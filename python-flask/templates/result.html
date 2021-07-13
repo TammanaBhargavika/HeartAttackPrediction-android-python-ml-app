@@ -70,20 +70,18 @@
                 <p id="safe" style="font-size: 23px; color: Green;"></p>
                 <!---<h2 class="text-danger">Final Result : {{rrr}}</h2>--->
               	{% if  rrr ==0 %}
-                  	<script>
-                         document.getElementById("safe").innerHTML = "Your are not diagnosed";
-                   		   //alert("You are not diagnosed")
-                    </script>
+                  <script>
+                         document.getElementById("safe").innerHTML = "Your are not diagnosed";                   		  
+                  </script>
                 	{% endif %}
 
                 	{% if  rrr ==1 %}
-                  	<script>
-                        document.getElementById("danger").innerHTML = "Your are diagnosed"
-              		      //alert("You are diagnosed")
-                    </script>
+                  <script>
+                        document.getElementById("danger").innerHTML = "Your are diagnosed";              		   
+                  </script>
                 	{% endif %}
             </div>
         </div>
     </div>
 </div>
- {%endblock%}
+{%endblock%}
